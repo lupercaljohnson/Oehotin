@@ -1,0 +1,118 @@
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head">
+        <meta charset="UTF-8" />
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            
+            <h1>Oehotin</h1>
+            <h2 th:text="${'Hello ' + message +'!'}">ToDO write content<h/2>
+           
+        </div>
+        
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  
+</nav>
+        
+        
+<div class="container" style="margin-top:30px">
+     <div class="row">
+    
+        <div class="col-sm-3">
+      <h2>About Me</h2>
+      <h5>Photo of me:</h5>
+      <div th:if="${profilepic != null}">
+           <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" alt="Profile picture" height="200" width="200"/>
+      </div>
+      <div>
+         <h3> Seurataan</h3>
+         <ol>
+            <li th:each="seuraaja : ${seurattavat}">
+                <a th:href="@{/{handle}/toisensivu (handle=${seuraaja.username})}"> 
+                    <span th:text="${seuraaja.username}">msg</span>
+                </a>
+                </li>
+        </ol>
+      </div>
+      
+      <div>
+          <h3>List of all users in Oehotin</h3>
+          <ol>
+            <li th:each="account : ${accounts}">
+                <a th:href="@{/{handle}/toisensivu (handle=${account.username})}"> 
+                    <span th:text="${account.username}">msg</span>
+                </a>
+                   
+                    
+                   
+                    
+            </li>
+        </ol>
+      </div>
+      
+     
+    </div>
+    
+    <div class="col-6">
+            <h2>My Pictures! (<span th:text="${count}">count</span> images)</h2>
+     
+            <ol>
+                <li th:each="picture : ${pictures}">
+                        <span>
+                            <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" height="300" width="300"/> 
+                        </span><div><p>Likes: <span th:text="${picture.likes}">msg</span></p>
+                            <p th:text="${picture.story}">story</p>    
+                        <form method="POST" th:action="@{/{handle}/profiilikuva/{id} (handle=${message},(id=${picture.id}) ) }">                  
+                            <input type="submit" value="Set as profile picture"/>      
+                        </form>
+                        <ol>
+                            
+                            <li th:each="message : ${messages}" th:if="${message.pictureId == picture.id}">
+                               
+                                      <span th:text="${ message.user.username + ': ' + message.content}">msg</span>
+                                     
+                            </li>
+                        </ol>
+                        <form method="POST" th:action="@{/messages/{id} (id=${picture.id})}" action="/messages">
+                            <input type="text" name="content"/>
+                            <input type="submit" value="Add!"/>
+                        </form>
+                    
+                </li>
+            </ol>
+            
+
+    </div>
+
+    <div class="col-3">
+        
+        <h2>Add new picture and story!!</h2>
+
+        <form method="POST" th:action="@{/{handle}/omasivu (handle=${message}) }" enctype="multipart/form-data">
+            <input type="file" name="file" id="file"/>
+           <input type="text" name="story" id="story"/> 
+            <input type="submit" value="Add!"/>
+        </form>
+        <p>
+    
+        
+        
+    </div>
+         </div>
+</div>
+
+        <div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+
+        <footer>
+            <form th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"></input>
+            </form>
+        </footer>
+  </div>
+    </body>
+</html>
