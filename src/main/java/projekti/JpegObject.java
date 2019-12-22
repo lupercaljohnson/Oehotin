@@ -31,8 +31,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class JpegObject extends AbstractPersistable<Long> {
 
     @Lob
-    //  @Basic(fetch = FetchType.LAZY)
-    //  @Type(type = "org.hibernate.type.BinaryType")
+    @Basic(fetch = FetchType.LAZY)
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] content;
 
     @ManyToMany(mappedBy = "pictures")
