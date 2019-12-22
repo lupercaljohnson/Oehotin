@@ -41,7 +41,7 @@ public class OmaSivuController {
         model.addAttribute("message", "Edes jotain");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        String useless;
+      
         String omasivu = "redirect:/" + username + "/omasivu/1";
 
         return omasivu;
