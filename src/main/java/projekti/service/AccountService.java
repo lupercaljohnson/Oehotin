@@ -44,4 +44,8 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public Account getAccount(Long id) {
+        return accountRepository.getOne(id);
+    }
+
 }

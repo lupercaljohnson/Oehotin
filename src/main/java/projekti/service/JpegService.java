@@ -51,23 +51,9 @@ public class JpegService {
 
     }
 
-    /*
-     @GetMapping(path = "/omasivu/{id}/content", produces = "image/jpeg")
-    @ResponseBody
-    public byte[] getContent(@PathVariable Long id) {
-        return jpegService.getContent(id);
-
-    }
-
-     @GetMapping(path = "/omasivu/{id}/content", produces = "image/jpeg")
-    @ResponseBody
-    public byte[] getContent(@PathVariable Long id) {
-        return jpegRepository.getOne(id).getContent();
-
-    }
-
-     */
+   
     public List<JpegObject> findByOwner(String username) {
+        
         return jpegRepository.findByOwner(accountService.findByUserName(username));
     }
 
@@ -88,10 +74,4 @@ public class JpegService {
         jpegRepository.save(kuva);
     }
 }
-/*
-    kuvaLista = jpegRepository.findByOwner(accountService.findByUserName(username));
 
-    kuvaLista = jpegService.findByOwner(username);
-
-    public List<JpegObject> findByOwner(Account account);
- */

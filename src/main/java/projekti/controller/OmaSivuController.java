@@ -54,7 +54,6 @@ public class OmaSivuController {
         String username = auth.getName();
 
         List<JpegObject> kuvaLista = new ArrayList<JpegObject>(10);
-        //kuvaLista = jpegRepository.findByOwner(accountService.findByUserName(username));
         kuvaLista = jpegService.findByOwner(username);
         Long pictureId = (Long) id;
 
@@ -74,36 +73,7 @@ public class OmaSivuController {
         return "omasivu";
     }
 
-    /*
-    @GetMapping(value = "/jpeg/{id}")
-    public String viewOne(Model model, @PathVariable Long id) {
-        Long imageCount = jpegRepository.count();
-        model.addAttribute("count", imageCount);
-
-        if (id >= 1L && id <= imageCount) {
-            model.addAttribute("current", id + 1);
-        }
-        if (id < imageCount && id > 0L) {
-            model.addAttribute("next", id + 1);
-        }
-        if (id > 1L) {
-            model.addAttribute("previous", id - 1);
-        }
-        return "jpeg";
-    }*/
- /*
-    @PostMapping("/omasivu")
-    public String add(@RequestParam("file") MultipartFile file) throws IOException {
-        if (!file.getContentType().equals("image/jpeg")) {
-            return "redirect:/omasivu";
-        }
-        JpegObject jpegObject = new JpegObject();
-        jpegObject.setContent(file.getBytes());
-        jpegObject.setLikes(1L);
-        jpegRepository.save(jpegObject);
-        return "redirect:/omasivu";
-    }
-     */
+   
     @PostMapping("{handle}/omasivu")
     public String addOmaPicture(@RequestParam("file") MultipartFile file, @PathVariable String handle, @RequestParam String story) throws IOException {
         if (!file.getContentType().equals("image/jpeg")) {
