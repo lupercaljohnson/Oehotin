@@ -35,7 +35,7 @@
       </div>
       
       <form method="POST" th:action="@{/{handle}/seuraa (handle=${message} ) }">
-                            <input type="submit" value="SEURAA"/>
+                            <input type="submit" value="Follow"/>
       </form>
     </div>
       
@@ -75,7 +75,10 @@
 
     <div class="col-3">
        
-        
+        <form th:action="@{/search}"method="GET">                          
+                <input  type="text" placeholder="Type name or press search" name="search" id="search" />
+                <button   type="submit">Search user</button>                           
+            </form>
         
     </div>
      </div>

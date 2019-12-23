@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+     <head th:replace="fragments/layout :: head">
+        <meta charset="UTF-8" />
+        <title>Search</title>
+    </head>
+    <body>
+        <div class="jumbotron text-center" style="margin-bottom:0">          
+           <h1>Welcome to Oehotin! </h1>         
+        </div>
+        
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+             <a th:href="@{/omasivu}">Return to own page!</a>
+        </nav>
+        
+        <div class="container" style="margin-top:30px">
+            <div class="row">
+    
+                <div class="col-sm-3">
+                </div>    
+        
+                <div class="col-sm-6"> 
+                    <h2>Search results</h2>
+               
+                    <div>
+                        
+                        <ol>
+                          <li th:each="account : ${account}">
+                              <a th:href="@{/{handle}/toisensivu (handle=${account.username})}"> 
+                                  <span th:text="${account.username}">msg</span>
+                              </a>
+                          </li>
+                        </ol>
+                    </div>
+                    <div>
+         
+                        <ol>
+                          <li th:each="account : ${user}">
+                              <a th:href="@{/{handle}/toisensivu (handle=${account.username})}"> 
+                                  <span th:text="${account.username}">msg</span>
+                              </a>
+                          </li>
+                        </ol>
+                    </div>
+                    <br></br>
+                    <div>
+          <h3>List of all users in Oehotin</h3>
+          <ol>
+            <li th:each="account : ${users}">
+                <a th:href="@{/{handle}/toisensivu (handle=${account.username})}"> 
+                    <span th:text="${account.username}">msg</span>
+                </a>
+            </li>
+        </ol>
+      </div>
+                </div>
+                <div class="col-sm-3">
+                </div>  
+            </div>
+        </div>
+        
+        <div class="jumbotron text-center" style="margin-bottom:0">
+
+
+        <footer>
+            <form th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"></input>
+            </form>
+        </footer>
+  </div>
+    </body>
+</html>

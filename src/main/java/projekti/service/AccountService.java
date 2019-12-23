@@ -24,6 +24,10 @@ public class AccountService {
         return accountRepository.findByUsername(username);
     }
 
+    public Account findByAccountName(String accountname) {
+        return accountRepository.findByAccountname(accountname);
+    }
+    
     public void saveAccount(Account a) {
         accountRepository.save(a);
     }
