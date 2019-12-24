@@ -32,8 +32,20 @@ public class MessageService {
         return messageRepository.findByPictureId(pictureId);
     }
 
+    public Message saveRest(Message msg) {
+        return messageRepository.save(msg);
+    }
+
     public void save(Message msg) {
         messageRepository.save(msg);
     }
-
+    
+    public Message getOne(Long id){
+        return messageRepository.getOne(id);
+    }
+    
+    
+    public void delete(Long id){
+     messageRepository.deleteById(id);
+    }
 }
