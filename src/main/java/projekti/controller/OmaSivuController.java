@@ -67,6 +67,7 @@ public class OmaSivuController {
         model.addAttribute("count", imageCount);
         model.addAttribute("message", username);
         model.addAttribute("handle", username);
+        
         model.addAttribute("messages", this.messageService.list());
         model.addAttribute("pictures", kuvaLista);
         model.addAttribute("profilepic", (accountService.findByUserName(username)).getProfilePictureId());

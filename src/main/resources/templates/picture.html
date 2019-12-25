@@ -1,16 +1,21 @@
-
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/layout :: head(title='Oehotin')">
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+     <head th:replace="fragments/layout :: head(title='Picture')">
         <meta charset="UTF-8" />
         <title>title</title>
     </head>
     <body style="font-family:tahoma">
         
-        <div class="jumbotron text-center" style="margin-bottom:0">
+       <div class="jumbotron text-center" style="margin-bottom:0">
             
             <h1>Oehotin</h1>
-            <h2 th:text="${'Hello ' + message +'!'}">ToDO write content</h2>
+            <h2>Picture</h2>
+            
            
         </div>
         
@@ -21,50 +26,49 @@
     <div class="row">
     
         <div class="col-sm-3">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
-      <div th:if="${profilepic != null}">
-           <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" alt="Profile picture" height="200" width="200"/>
-      </div>
-      <div>
-         <h3> Seurataan</h3>
-         <ol>
-            <li th:each="seuraaja : ${seurattavat}">
-                <a th:href="@{/{handle}/toisensivu (handle=${seuraaja.username})}"> 
-                    <span th:text="${seuraaja.username}">msg</span>
-                </a>
-                </li>
-        </ol>
-      </div>
+            
+             </div>
       
       
       
      
-    </div>
+    
     
     <div class="col-6">
-            <h2>My Pictures! (<span th:text="${count}">count</span> images)</h2>
+            
      
-            <ol>
-                <li th:each="picture : ${pictures}">
-                        <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">
+                        <form method="POST" th:action="@{/{handle}/profiilikuva/{id} (handle=${message},(id=${picture.id}) ) }">                  
+                            <input type="submit" value="Set as profile picture"/>      
+                        </form>
+                        <span>
                             <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" height="300" width="300"/> 
-                        </a>
+                        </span>
                         
-                        <div><p>Likes: <span th:text="${picture.likes}">msg</span></p>
+                        <p>Likes: <span th:text="${picture.likes}">msg</span></p>
                             <p th:text="${picture.story}">story</p>    
                        
-                        <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">See comments</a>
+                        <ol>
                             
+                            <li th:each="message : ${messages}" th:if="${message.pictureId == picture.id}">
+                               
+                                      <span th:text="${ message.user.username + ': ' + message.content}">msg</span>
+                                     
+                            </li>
+                        </ol>
+                           
                         <form method="POST" th:action="@{/messages/{id} (id=${picture.id})}" style="margin-top:10px">
                             <input type="text" name="content" id="message"/>
                             <input type="submit" value="Add comment!"/>
                         </form>
-                        
-                       
+                            
+                           <form method="POST" th:action="@{/omasivu/{id}/picture (id=${picture.id})}" style="margin-top:10px">
+                            
+                            <input type="submit" value="Delete"/>
+                        </form>
+                         
                     
-                </li>
-            </ol>
+              
+           
             
 
     </div>

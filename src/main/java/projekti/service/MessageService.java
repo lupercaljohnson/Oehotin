@@ -48,4 +48,11 @@ public class MessageService {
     public void delete(Long id){
      messageRepository.deleteById(id);
     }
+    
+    public void deletemessages(Long id){
+     List<Message> lista = messageRepository.findByPictureId(id);
+     for (int i=0 ; i < lista.size() ; i++){
+         messageRepository.delete(lista.get(i));
+     }
+    }
 }

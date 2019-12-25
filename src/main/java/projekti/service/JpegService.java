@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import projekti.Account;
 import projekti.JpegObject;
 import projekti.JpegObjectRepository;
+import projekti.Message;
 
 @Service
 public class JpegService {
@@ -28,6 +29,9 @@ public class JpegService {
 
     @Autowired
     private AccountService accountService;
+    
+    @Autowired
+    private MessageService messageService;
 
     public Long getCount() {
         return jpegRepository.count();
@@ -72,6 +76,18 @@ public class JpegService {
 
     public void save(JpegObject kuva) {
         jpegRepository.save(kuva);
+    }
+
+    public JpegObject getOne(Long id) {
+        return jpegRepository.getOne(id);
+    }
+
+    public void delete(Long id, String handle) {
+        //List<Message> deletedmessages =  messageService.listPic(id);
+        messageService.deletemessages(id);
+        accountService.deletepictures(id, handle);
+        JpegObject kuva = jpegRepository.getOne(id);
+        jpegRepository.deleteById(kuva.getId());
     }
 }
 

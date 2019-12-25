@@ -75,8 +75,9 @@ public class MessageController {
             messageService.save(msg);
 
         }
-
-        return "redirect:/omasivu";
+  
+        String returnStr = "redirect:/omasivu/"+id+"/picture";
+        return returnStr;
 
     }
 

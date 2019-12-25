@@ -19,6 +19,9 @@ public class AccountService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    JpegService jpegService;
 
     public Account findByUserName(String username) {
         return accountRepository.findByUsername(username);
@@ -46,6 +49,12 @@ public class AccountService {
 
     public Account getAccount(Long id) {
         return accountRepository.getOne(id);
+    }
+
+    void deletepictures(Long id, String handle) {
+         Account account = accountRepository.findAccountByUsername(handle);
+                
+        account.getPictures().remove(jpegService.getOne(id));
     }
 
 }
