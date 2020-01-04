@@ -17,4 +17,8 @@ public class DefaultController {
         return "redirect:/omasivu";
     }
 
+    @GetMapping("/contact")
+    public String contaktos(){
+        return "contact";
+    }
 }

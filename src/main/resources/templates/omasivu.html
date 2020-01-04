@@ -5,81 +5,114 @@
         <meta charset="UTF-8" />
         <title>title</title>
     </head>
-    <body style="font-family:tahoma">
-        
-        <div class="jumbotron text-center" style="margin-bottom:0">
-            
-            <h1>Oehotin</h1>
-            <h2 th:text="${'Hello ' + message +'!'}">ToDO write content</h2>
-           
-        </div>
-        
+    <body>
         <div th:replace="fragments/layout :: nav"></div>
         
+        <div class="container">
+            
+            <div class="jumbotron text-center">
+
+                <h1><i class="fas fa-crow"></i> Oehotin</h1>
+                <h2 th:text="${'Hello ' + message +'!'}">ToDO write content</h2>
+
+            </div>
         
-<div class="container" style="margin-top:30px">
-    <div class="row">
+        
+        
+        
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <h2>About Me</h2>
+                <h5>Photo of me:</h5>
+                <div th:if="${profilepic != null}">
+                    <div class="thumbnail"> <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" alt="Profile picture"/></div>
+                </div>
+                <br>
+                <hr>
+                <br>    
+                <div>
+                   <h3> Seurataan</h3>
+                   <ol>
+                        <li th:each="seuraaja : ${seurattavat}">
+                            <a th:href="@{/{handle}/toisensivu (handle=${seuraaja.username})}"> 
+                                <span th:text="${seuraaja.username}">msg</span>
+                            </a>
+                        </li>
+                  </ol>
+                </div>
+
+            </div>
     
-        <div class="col-sm-3">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
-      <div th:if="${profilepic != null}">
-           <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" alt="Profile picture" height="200" width="200"/>
-      </div>
-      <div>
-         <h3> Seurataan</h3>
-         <ol>
-            <li th:each="seuraaja : ${seurattavat}">
-                <a th:href="@{/{handle}/toisensivu (handle=${seuraaja.username})}"> 
-                    <span th:text="${seuraaja.username}">msg</span>
-                </a>
-                </li>
-        </ol>
-      </div>
-      
-      
-      
-     
-    </div>
-    
-    <div class="col-6">
+            <div class="col-md-6">
             <h2>My Pictures! (<span th:text="${count}">count</span> images)</h2>
      
             <ol>
                 <li th:each="picture : ${pictures}">
-                        <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">
-                            <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" height="300" width="300"/> 
+                        <div class="thumbnail"> <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">
+                            <img th:src="@{/omasivu/{id}/content(id=${picture.id})}"/> 
                         </a>
+                        </div>
                         
                         <div><p>Likes: <span th:text="${picture.likes}">msg</span></p>
                             <p th:text="${picture.story}">story</p>    
                        
                         <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">See comments</a>
-                            
-                        <form method="POST" th:action="@{/messages/{id} (id=${picture.id})}" style="margin-top:10px">
-                            <input type="text" name="content" id="message"/>
-                            <input type="submit" value="Add comment!"/>
-                        </form>
+                        <br></br>
                         
-                       
-                    
+                        <form method="POST" th:action="@{/messages/{id} (id=${picture.id})}">
+                            <div class="form-group">
+                            <input class="form-control" type="text" name="content" id="message"/>
+                            <button type="submit" class="btn btn-default" value="Add comment!">Add comment!</button>
+                            </div>
+                        </form> 
+                        <hr>
+                        <br>
                 </li>
             </ol>
             
 
     </div>
 
-        <div class="col-3">
+        <div class="col-md-3">
         
             <h2>Add new picture and story!</h2>
 
             <form method="POST" th:action="@{/{handle}/omasivu (handle=${message}) }" enctype="multipart/form-data">
-                <input type="file" name="file" id="file" placeholder="Select file"/>
-               <input type="text" name="story" id="story" placeholder="Story goes here"/> 
-                <input type="submit" value="Add!"/>
+                <div class="form-group"> 
+                    <label class="custom-file-upload">   
+                     <input class="btn btn-default" type="file" name="file" id="file"/>
+                    Choose picture
+                    </label>    
+                </div>
+                 
+                <div class="form-group"> 
+                    <input class="form-control" type="text" name="story" id="story" placeholder="Story goes here"/>
+                </div>    
+                
+                <button type="submit" class="btn btn-default">Add!</button>
+                    
             </form>
-            
-            <br></br>
+            <!--
+                       
+                        <div class="form-group">
+                          <label for="usernamee">Username</label>
+                        <input class="form-control" id="usernamee" placeholder="Username" name="username" type="text" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                        <input class="form-control" id="password" placeholder="Password" name="password" type="password" />
+                        </div>
+                        
+                         <button type="submit" class="btn btn-default" value="Log in">Submit</button>
+                        
+                        </form>
+                        -->
+                        <br>
+                        <hr>
+                        <br>
             <div th:replace="fragments/layout :: search"></div>
 
 
