@@ -28,7 +28,7 @@
                 <h2>About Me</h2>
                 <h5>Photo of me:</h5>
                 <div th:if="${profilepic != null}">
-                    <div class="thumbnail"><img th:src="@{/omasivu/{id}/content(id=${profilepic})}" alt="Profile picture"/></div>
+                    <div class="card"> <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" class="card-img-top" alt="Profile picture"/></div>
                 </div>
 
                 <form method="POST" th:action="@{/{handle}/seuraa (handle=${message} ) }">
@@ -42,14 +42,14 @@
                 <h2>My Pictures! (<span th:text="${count}">count</span> images)</h2>
                 <ol>
                     <li th:each="picture : ${pictures}">
-                        <span>
-                            <div class="thumbnail">  <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" /> </div>
-                        </span>
+                        <div class="card border-0"> 
+                              <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" class="card-img-top"/> 
+                        
                         <div>
                             <p>Likes: <span th:text="${picture.likes}">msg</span></p>
                         
                             <form method="POST" th:action="@{/{handle}/likes/{id}  (handle=${message},id=${picture.id}) }">
-                                <button class="btn btn-default" type="submit">Add more Like!</button>
+                                <button class="btn btn-default" type="submit"><i class="far fa-heart"></i> Like!</button>
                             </form>
                         </div>
                             <ol>
@@ -66,12 +66,7 @@
                                 <button class="btn btn-default" type="submit" >Add comment!</button>
                                  
                             </form>
-                        <!--<form method="POST" th:action="@{/messages/{id} (id=${picture.id})}">
-                            <div class="form-group">
-                            <input class="form-control" type="text" name="content" id="message"/>
-                            <button type="submit" class="btn btn-default" value="Add comment!">Add comment!</button>
-                            </div>
-                            </form>  -->
+                        </div>
                     </li>
                 </ol>
             </div>

@@ -36,9 +36,11 @@ and open the template in the editor.
                         <form method="POST" th:action="@{/{handle}/profiilikuva/{id} (handle=${message},(id=${picture.id}) ) }">                  
                             <button class="btn btn-default" type="submit">Set as profile picture</button> 
                         </form>
-                        <span>
-                            <div class="thumbnail"><img th:src="@{/omasivu/{id}/content(id=${picture.id})}"/> </div>
-                        </span>
+                        
+                            <div class="card border-0"> 
+                                
+                                <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" class="card-img-top"/> 
+                        
                         
                         <p>Likes: <span th:text="${picture.likes}">msg</span></p>
                             <p th:text="${picture.story}">story</p>    
@@ -62,7 +64,7 @@ and open the template in the editor.
                             <input type="submit" value="Delete"/>
                         </form>
                          
-                    
+                    </div>
               
            
             

@@ -27,7 +27,7 @@
                 <h2>About Me</h2>
                 <h5>Photo of me:</h5>
                 <div th:if="${profilepic != null}">
-                    <div class="thumbnail"> <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" alt="Profile picture"/></div>
+                    <div class="card"> <img th:src="@{/omasivu/{id}/content(id=${profilepic})}" class="card-img-top" alt="Profile picture"/></div>
                 </div>
                 <br>
                 <hr>
@@ -50,12 +50,13 @@
      
             <ol>
                 <li th:each="picture : ${pictures}">
-                        <div class="thumbnail"> <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">
-                            <img th:src="@{/omasivu/{id}/content(id=${picture.id})}"/> 
+                        <div class="card border-0"> 
+                            <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">
+                            <img th:src="@{/omasivu/{id}/content(id=${picture.id})}" class="card-img-top"/> 
                         </a>
-                        </div>
                         
-                        <div><p>Likes: <span th:text="${picture.likes}">msg</span></p>
+                        
+                        <p><i class="far fa-heart"></i> Likes: <span th:text="${picture.likes}">msg</span></p>
                             <p th:text="${picture.story}">story</p>    
                        
                         <a th:href="@{/omasivu/{id}/picture(id=${picture.id})}">See comments</a>
@@ -68,7 +69,7 @@
                             </div>
                         </form> 
                         <hr>
-                        <br>
+                        </div>
                 </li>
             </ol>
             
